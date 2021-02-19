@@ -1,1 +1,1 @@
-rootProject.name = "remoteconfig-core"
+rootProject.name = "RemoteConfigCore"
