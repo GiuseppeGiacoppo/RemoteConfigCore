@@ -3,11 +3,11 @@ plugins {
     id("maven-publish")
 }
 
-group = "me.giacoppo"
+group = "com.github.GiuseppeGiacoppo"
 version = "1.0.0"
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 val deploy by tasks.creating(GradleBuild::class) {
