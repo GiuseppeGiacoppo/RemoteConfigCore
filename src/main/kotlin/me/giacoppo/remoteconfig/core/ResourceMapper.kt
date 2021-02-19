@@ -1,10 +1,12 @@
 package me.giacoppo.remoteconfig.core
 
-/**
- * It is used to map the remote configuration class to repository class
- */
-interface ResourceMapper<T, F> {
-    fun toRepository(config: Any): F
+import java.io.InputStream
 
-    fun fromRepository(config: F, c: Class<T>): T
+/**
+ * Map the remote configuration class to repository class
+ */
+interface ResourceMapper {
+    fun <T> toRepository(config: T): InputStream
+
+    fun <T> fromRepository(config: InputStream, c: Class<T>): T
 }

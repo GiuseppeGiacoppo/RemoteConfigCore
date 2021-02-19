@@ -1,9 +1,7 @@
-import java.util.Date
 plugins {
     kotlin("jvm") version "1.4.0"
     id("maven-publish")
     id("org.jetbrains.dokka") version "0.10.1"
-    id ("com.jfrog.bintray") version "1.8.5"
 }
 
 apply {
@@ -15,9 +13,7 @@ version = ext.get("projectVersion") as String
 
 repositories {
     jcenter()
-    mavenCentral()
 }
-dependencies {}
 
 tasks {
     dokka {
@@ -72,27 +68,6 @@ publishing {
     }
 }
 
-bintray {
-    user = rootProject.ext.get("bintrayUser") as String
-    key = rootProject.ext.get("bintrayKey") as String
-    setPublications(rootProject.ext.get("projectName") as String)
-    override = true
-    pkg.apply {
-        repo = rootProject.ext.get("bintrayRepo") as String
-        name = rootProject.ext.get("projectName") as String
-        description = rootProject.ext.get("projectDescription") as String
-        publish = true
-        publicDownloadNumbers = true
-        setLicenses("Apache-2.0")
-        vcsUrl = rootProject.ext.get("gitProjectLink") as String
-        version.apply {
-            name = rootProject.ext.get("projectVersion") as String
-            desc = rootProject.ext.get("projectDescription") as String
-            released = Date().toString()
-        }
-    }
-}
-
 val deploy by tasks.creating(GradleBuild::class) {
-    tasks = listOf("clean", "assemble", "bintrayUpload")
+    tasks = listOf("clean", "assemble", "publishRemoteConfigCorePublicationToLocalRepository")
 }
